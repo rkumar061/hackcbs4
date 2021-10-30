@@ -105,6 +105,7 @@
 </style>
 <body>
 <?php
+  session_start();  
   include 'header.php';
   ?>  
 
@@ -112,21 +113,19 @@
 <section class="profile-wrap">
     <div>
         <?php
-          $host="mysql-55985-0.cloudclusters.net:17298";
-          $user="admin";
-          $password="9iYYKkqv";
-          $database="h4c";
-          $u_id = 100 ;
+          include '../dbdetails.php';
+          
+
           $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
           $psy = $pdo->prepare('SELECT * FROM psy WHERE u_id = ?');
           $psy->execute([$_SESSION['uid']]);
-          // $psy->execute([$psy]);
+          
           $psydetails=$psy->fetch(PDO::FETCH_OBJ);
           
 
           
         ?>
-        <span class="profile-wrapper-name"><?php echo $psydetails->PsyName ?></span>
+        <span class="profile-wrapper-name"><?php echo $result->name ?></span>
          <br><span class="profile-wrapper-certificates"><?php echo $psydetails->degree ?><br> <?php echo $psydetails->specialities ?> </span>
     </div>
 </section>
@@ -141,13 +140,36 @@
  		</tr>
  	</thead>
  	<tbody>
+     <?php
+   $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
+      // echo "connection established succesfully"."<br>";
+      
+      $q = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
+      $q->execute([$psydetails->psy_id]);
+      // echo $_SESSION['uid'];
+      // $result=$q->fetch(PDO::FETCH_OBJ);
+      if ($q->rowCount() > 0)
+      { 
+        while($pdetails=$q->fetch(PDO::FETCH_OBJ))
+        {
+          $p = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
+          $p->execute([$pdetails->u_id]);
+          $pname=$p->fetch(PDO::FETCH_OBJ);
+
+          $s = $pdo->prepare('SELECT * FROM session WHERE patient_id = ? && done=0');
+          $s->execute([$pdetails->p_id]);
+          $session=$s->fetch(PDO::FETCH_OBJ)
+      ?>
  		<tr>
        <!-- Requires Backend Job -->
- 			<td class="psy-table-patient-name">Sonia Gandhi</td>
-       <td class="psy-table-remark">Pappu Ki Maa</td>
- 			<td class="psy-table-report"><button class="psy-table-btn">Reports</button></td>
- 			<td class="psy-table-schedule-date"><span>11/12/2013</span><button class="psy-table-btn">Join Now</button></td>
+ 			<td class="psy-table-patient-name"><?php echo $pname->name;?></td>
+       <td class="psy-table-remark"><?php echo $session->remark;?></td>
+ 			<td class="psy-table-report"><button class="psy-table-btn" href="report.php">Report</button></td>
+ 			<td class="psy-table-schedule-date"><span><?php echo $session->date.' <br> '.$session->time;?></span><button class="psy-table-btn">Join Now</button></td>
  		</tr>
+     <?php
+        }}
+        ?>
  	</tbody>
  </table>
 </section>

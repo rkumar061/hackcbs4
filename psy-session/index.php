@@ -20,10 +20,10 @@ $role=$result->role;
 $_SESSION['uid']=$result->u_id;
 
     if($role==1){
-        header("Location: http://localhost/h4c/psy-session/patient-dashboard.php");
+        header("Location: http://localhost/hackcbs4/psy-session/patient-dashboard.php");
     }
     else if($role==2){
-        header("Location: http://localhost/h4c/psy-session/psy-dashboard.php");
+        header("Location: http://localhost/hackcbs4/psy-session/psy-dashboard.php");
     }
     else if($role=='r'){
         header("Location: http://localhost/IEEE/formresident.php?x=$uid&y=$pin");
