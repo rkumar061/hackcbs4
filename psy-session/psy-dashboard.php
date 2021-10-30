@@ -83,11 +83,8 @@ td{
     <?php
     session_start();
     include 'header.php';
-    if(!isset($_SESSION['uid'])){
-      header("Location: http://localhost/hackcbs4/psy-session/");
-
-    }
-    ?>
+    if(isset($_SESSION['uid'])){
+     ?>
 
 <section class="profile-wrap">
     <div>
@@ -155,5 +152,8 @@ td{
     </table>
   </div>
 </section>
+<?php }
+    ?>
 </body>
+
 </html>
