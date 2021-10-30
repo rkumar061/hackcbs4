@@ -26,6 +26,10 @@
         font-size:50px;
         font-weight: medium;
     }
+
+    .profile-wrapper-certificates{
+      padding-top:4px;
+    }
     .content-wrap{
       padding-left:10px;
       padding-right:10px;
@@ -102,6 +106,14 @@
       font-family: inherit;
     }
 
+    .anchor-btn{
+      margin: 0px;
+      padding: 0px;
+      font-family: inherit;
+      text-decoration: none;
+      color: inherit;
+    }
+
 </style>
 <body>
 <?php
@@ -126,7 +138,7 @@
           
         ?>
         <span class="profile-wrapper-name"><?php echo $result->name ?></span>
-         <br><span class="profile-wrapper-certificates"><?php echo $psydetails->degree ?><br> <?php echo $psydetails->specialities ?> </span>
+         <br><br><span class="profile-wrapper-certificates"><?php echo $psydetails->degree ?><br> <?php echo $psydetails->specialities ?> </span>
     </div>
 </section>
 <section class="content-wrap">
@@ -158,14 +170,14 @@
 
           $s = $pdo->prepare('SELECT * FROM session WHERE patient_id = ? && done=0');
           $s->execute([$pdetails->p_id]);
-          $session=$s->fetch(PDO::FETCH_OBJ)
+          $session=$s->fetch(PDO::FETCH_OBJ);
       ?>
  		<tr>
        <!-- Requires Backend Job -->
  			<td class="psy-table-patient-name"><?php echo $pname->name;?></td>
        <td class="psy-table-remark"><?php echo $session->remark;?></td>
- 			<td class="psy-table-report"><button class="psy-table-btn" href="report.php">Report</button></td>
- 			<td class="psy-table-schedule-date"><span><?php echo $session->date.' <br> '.$session->time;?></span><button class="psy-table-btn">Join Now</button></td>
+ 			<td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
+ 			<td class="psy-table-schedule-date"><span><?php echo $session->date.' <br> '.$session->time;?></span><button class="psy-table-btn"><a class="anchor-btn" href="<?php echo $session->link ?>">Join Now</a></button></td>
  		</tr>
      <?php
         }}
