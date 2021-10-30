@@ -1,12 +1,8 @@
 <?php
 session_start();
 if (isset($_SESSION['uid'])){
-echo $_SESSION['uid'];
-include '../dbdetails.php';
-
+// enter code here
 
 }
-else{
-    header("Location: http://localhost/h4c/psy-session/");
-}
+
 ?>
