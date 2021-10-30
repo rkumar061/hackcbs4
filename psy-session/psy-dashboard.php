@@ -156,19 +156,19 @@
    $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
       // echo "connection established succesfully"."<br>";
       
-      $q = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
-      $q->execute([$psydetails->psy_id]);
+      $pt = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
+      $pt->execute([$psydetails->psy_id]);
       // echo $_SESSION['uid'];
       // $result=$q->fetch(PDO::FETCH_OBJ);
-      if ($q->rowCount() > 0)
+      if ($pt->rowCount() > 0)
       { 
-        while($pdetails=$q->fetch(PDO::FETCH_OBJ))
+        while($pdetails=$pt->fetch(PDO::FETCH_OBJ))
         {
           $p = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
           $p->execute([$pdetails->u_id]);
           $pname=$p->fetch(PDO::FETCH_OBJ);
 
-          $s = $pdo->prepare('SELECT * FROM session WHERE patient_id = ? && done=0');
+          $s = $pdo->prepare('SELECT * FROM session WHERE p_id = ? && done=0');
           $s->execute([$pdetails->p_id]);
           $session=$s->fetch(PDO::FETCH_OBJ);
       ?>
