@@ -1,11 +1,11 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="fonts.css">
     <title>Document</title>
+
 </head>
 <style>
     body{
@@ -27,133 +27,118 @@
         font-weight: medium;
     }
 
-table{
-    padding-left:40px;
-    padding-right:40px;
-    font-family: 'Courgette', cursive;
-    table-layout: fixed;
-}
-.tbl-header{
-    background: rgba(255,255,255,0.2);
- }
-.tbl-content{
-  height:300px;
-  overflow-x:auto;
-  margin-top: 0px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-th{
-  padding: 20px 15px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 20px;
-  color: #fff;
-  
-}
-td{
-  padding: 15px;
-  text-align: left;
-  vertical-align:middle;
-  font-weight: 300;
-  font-size: 12px;
-  color: #fff;
-  border-bottom: solid 1px rgba(255,255,255,0.1);
-}
+   .content-wrap{
+     padding-left:10px;
+     padding-right:10px;
+     margin:0px;
+   }
 
+   .psy-table{
+     width:100%;
+     align: center;
+     background: none;
+     border: 0px;
+     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
-/* for custom scrollbar for webkit browser*/
+   }
 
-::-webkit-scrollbar {
-    width: 6px;
-} 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-} 
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-}
+   .psy-table thead{
+     background-color: rgba(0,0,0,0.5);
+     color: rgb(224,255,255);
+     text-align: center;
+     font-family: 'Ubuntu', sans-serif;
+     font-size:18px;
+   }
+
+   .psy-table th{
+     padding-left: 15px;
+     padding-right: 15px;
+     padding-top: 10px;
+     margin:0px;
+   }
+   
+   .psy-table tbody{
+      background-color: rgba(0,0,0, 0.7);
+      color: rgb(224,255,255);
+      text-align: center;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 15px;
+   }
+
+   .psy-table td{
+    padding-left: 15px;
+     padding-right: 15px;
+     padding-top: 10px;
+     padding-bottom: 10px;
+   }
+
+   .psy-table-schedule-date{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+   }
+
+   .psy-table-report{
+     text-align:center;
+   }
+
+   .psy-table-btn{
+     background:rgb(224,255,255);
+     color: rgba(0,0,0,1);
+     padding: 6px;
+     border-radius:0px;
+     border: none;
+     transition: 0.3s;
+     font-family: inherit;
+     font-weight:bold;
+   }
+
+   .psy-table-btn:hover{
+     background:none;
+     color: rgb(224,255,255);
+     padding: 6px;
+     font-weight: bold;
+     border-radius: 15px;
+     border: 3px solid rgb(224,255,255); 
+     font-family: inherit;
+   }
+
 </style>
-<script>
-    $(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
-</script>
+
 <body>
-    <?php
-    session_start();
-    include 'header.php';
-    if(isset($_SESSION['uid'])){
-     ?>
+<?php
+ include 'header.php';
+ ?>  
 
 <section class="profile-wrap">
     <div>
-        <span class="profile-wrapper-name"><?php echo $result->name; ?></span>
-        <?php
-          $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
-          // echo "connection established succesfully"."<br>";
-          
-          $psy = $pdo->prepare('SELECT * FROM psy WHERE u_id = ?');
-          $psy->execute([$_SESSION['uid']]);
-          $psydetails=$psy->fetch(PDO::FETCH_OBJ)
-        ?>
-        <br><span class="profile-wrapper-certificates"> <?php echo $psydetails->degree.'<br>'.$psydetails->specialities ?></span>
+        <!-- Requires Backend Job -->
+        <span class="profile-wrapper-name">Dr. John Doe</span>
+        <br><span class="profile-wrapper-certificates"> MBBS, FRCOG, MD, ENT </span>
     </div>
 </section>
 <section class="content-wrap">
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead><br><h3 style="text-align:center;color:#fff;">Upcoming Meetings</h3>
-       
-        <tr>
-          <th>Patient Name</th>
-          <th>Schedule</th>
-          <th>remark</th>
-          <th></th>
-        </tr>
-       
-      </thead>
-      
-      <tbody>
-        
-     
-        <?php
-        include '../dbdetails.php';
-      $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
-      // echo "connection established succesfully"."<br>";
-      
-      $q = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
-      $q->execute([$_SESSION['uid']]);
-      // $result=$q->fetch(PDO::FETCH_OBJ);
-      if ($q->rowCount() > 0)
-      { 
-        while($pdetails=$q->fetch(PDO::FETCH_OBJ))
-        {
-          $p = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
-          $p->execute([$pdetails->p_id]);
-          $pname=$p->fetch(PDO::FETCH_OBJ);
+  
 
-          $s = $pdo->prepare('SELECT * FROM session WHERE patient_id = ? && done=0');
-          $s->execute([$pdetails->p_id]);
-          $session=$s->fetch(PDO::FETCH_OBJ)
-        ?>
-         <tr>
-        <th><?php echo  $pname->name; ?></th>
-      <th><?php echo  $session->date.' | '.$session->time; ?></th>
-      <th><?php echo  $session->remark; ?></th>
-      <th><a href="<?php echo 'report.php?pid='.$session->patient_id; ?>">view report</a></th>
-      <th><a href="<?php echo $session->link; ?>">join meeting</a></th>
-      </tr>
-      <?php
-        }
-      }
-      ?>
-      </tbody>
-    </table>
-  </div>
+<table class="psy-table" cellspacing="0px">
+	<thead>
+		<tr>
+			<th><h1>Patient Name</h1></th>
+      <th><h1>Remarks</h1></th>
+			<th><h1>Reports</h1></th>
+			<th><h1>Schedule</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+      <!-- Requires Backend Job -->
+			<td class="psy-table-patient-name">Sonia Gandhi</td>
+      <td class="psy-table-remark">Pappu Ki Maa</td>
+			<td class="psy-table-report"><button class="psy-table-btn">Reports</button></td>
+			<td class="psy-table-schedule-date"><span>11/12/2013</span><button class="psy-table-btn">Join Now</button></td>
+		</tr>
+	</tbody>
+</table>
 </section>
-<?php }
-    ?>
-</body>
 
-</html>
+</body></html>
