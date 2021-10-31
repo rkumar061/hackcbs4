@@ -114,6 +114,13 @@
       color: inherit;
     }
 
+    .table-header{
+        font-family:'Ubuntu', sans-serif;
+        font-size: 25px;
+        font-weight:medium;
+        color: rgb(224,255,255);
+    }
+
 </style>
 <body>
 <?php
@@ -142,6 +149,8 @@
     </div>
 </section>
 <section class="content-wrap">
+<br><br><span class="table-header">Scheduled Sessions</span><br><br>
+<section>
 <table class="psy-table" cellspacing="0px">
  	<thead>
  		<tr>
@@ -156,13 +165,13 @@
    $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
       // echo "connection established succesfully"."<br>";
       
-      $pt = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
-      $pt->execute([$psydetails->psy_id]);
+      $q = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
+      $q->execute([$psydetails->psy_id]);
       // echo $_SESSION['uid'];
       // $result=$q->fetch(PDO::FETCH_OBJ);
-      if ($pt->rowCount() > 0)
+      if ($q->rowCount() > 0)
       { 
-        while($pdetails=$pt->fetch(PDO::FETCH_OBJ))
+        while($pdetails=$q->fetch(PDO::FETCH_OBJ))
         {
           $p = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
           $p->execute([$pdetails->u_id]);
@@ -184,7 +193,29 @@
         ?>
  	</tbody>
  </table>
- <a href="../blog/writeblog.php"> <h1>write a blog</h1></a>
 </section>
+<br><br><span class="table-header">Patient List</span><br><br>
+<section>
+  <table class="psy-table" cellspacing="0px">
+ 	  <thead>
+ 		  <tr>
+        <th><h1>Patient ID</h1></th>
+ 			  <th><h1>Patient Name</h1></th>
+        <th><h1>Remarks</h1></th>
+ 			  <th><h1>Reports</h1></th>
+ 		  </tr>
+ 	  </thead>
+    <tbody>
+      <tr>
+        <td class="psy-table-patient-id">69</td>
+        <td class="psy-table-patient-name">Ramu Kaka</td>
+        <td class="psy-table-remark">Gandu</td>
+        <td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+   
+</section> 
 </body>
 </html>
