@@ -38,6 +38,13 @@
         padding: 7px;
         border-radius: 10px;
     }
+    textarea{
+        width:80%;
+        margin: 9px;
+        font-size: 14px;
+        padding: 7px;
+        border-radius: 10px; 
+    }
     form{
         display: flex;
         flex-direction: column;
