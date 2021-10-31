@@ -1,12 +1,6 @@
 html {
-    height: 100%;
-  }
-  body {
-    margin:0;
-    padding:0;
-    font-family: sans-serif;
-    background: linear-gradient(#141e30, #4DD0E1);
-  }
+  height: 100%;
+}
   
   .login-box {
     margin-top: 70px;

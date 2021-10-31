@@ -149,73 +149,73 @@
     </div>
 </section>
 <section class="content-wrap">
-<br><br><span class="table-header">Scheduled Sessions</span><br><br>
-<section>
-<table class="psy-table" cellspacing="0px">
- 	<thead>
- 		<tr>
- 			<th><h1>Patient Name</h1></th>
-       <th><h1>Remarks</h1></th>
- 			<th><h1>Reports</h1></th>
- 			<th><h1>Schedule</h1></th>
- 		</tr>
- 	</thead>
- 	<tbody>
-     <?php
-   $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
-      // echo "connection established succesfully"."<br>";
-      
-      $q = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
-      $q->execute([$psydetails->psy_id]);
-      // echo $_SESSION['uid'];
-      // $result=$q->fetch(PDO::FETCH_OBJ);
-      if ($q->rowCount() > 0)
-      { 
-        while($pdetails=$q->fetch(PDO::FETCH_OBJ))
-        {
-          $p = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
-          $p->execute([$pdetails->u_id]);
-          $pname=$p->fetch(PDO::FETCH_OBJ);
-
-          $s = $pdo->prepare('SELECT * FROM session WHERE p_id = ? && done=0');
-          $s->execute([$pdetails->p_id]);
-          $session=$s->fetch(PDO::FETCH_OBJ);
-      ?>
- 		<tr>
-       <!-- Requires Backend Job -->
- 			<td class="psy-table-patient-name"><?php echo $pname->name;?></td>
-       <td class="psy-table-remark"><?php echo $session->remark;?></td>
- 			<td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
- 			<td class="psy-table-schedule-date"><span><?php echo $session->date.' <br> '.$session->time;?></span><button class="psy-table-btn"><a class="anchor-btn" href="<?php echo $session->link ?>">Join Now</a></button></td>
- 		</tr>
-     <?php
-        }}
-        ?>
- 	</tbody>
- </table>
-</section>
-<br><br><span class="table-header">Patient List</span><br><br>
-<section>
+  <br><br><span class="table-header">Scheduled Sessions</span><br><br>
+  <section>
   <table class="psy-table" cellspacing="0px">
- 	  <thead>
- 		  <tr>
-        <th><h1>Patient ID</h1></th>
- 			  <th><h1>Patient Name</h1></th>
-        <th><h1>Remarks</h1></th>
- 			  <th><h1>Reports</h1></th>
- 		  </tr>
- 	  </thead>
-    <tbody>
+    <thead>
       <tr>
-        <td class="psy-table-patient-id">69</td>
-        <td class="psy-table-patient-name">Ramu Kaka</td>
-        <td class="psy-table-remark">Gandu</td>
-        <td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
+        <th><h1>Patient Name</h1></th>
+        <th><h1>Remarks</h1></th>
+        <th><h1>Reports</h1></th>
+        <th><h1>Schedule</h1></th>
       </tr>
+    </thead>
+    <tbody>
+      <?php
+    $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
+        // echo "connection established succesfully"."<br>";
+        
+        $q = $pdo->prepare('SELECT * FROM patient WHERE psy_id = ? && status=0');
+        $q->execute([$psydetails->psy_id]);
+        // echo $_SESSION['uid'];
+        // $result=$q->fetch(PDO::FETCH_OBJ);
+        if ($q->rowCount() > 0)
+        { 
+          while($pdetails=$q->fetch(PDO::FETCH_OBJ))
+          {
+            $p = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
+            $p->execute([$pdetails->u_id]);
+            $pname=$p->fetch(PDO::FETCH_OBJ);
+
+            $s = $pdo->prepare('SELECT * FROM session WHERE p_id = ? && done=0');
+            $s->execute([$pdetails->p_id]);
+            $session=$s->fetch(PDO::FETCH_OBJ);
+        ?>
+      <tr>
+        <!-- Requires Backend Job -->
+        <td class="psy-table-patient-name"><?php echo $pname->name;?></td>
+        <td class="psy-table-remark"><?php echo $session->remark;?></td>
+        <td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
+        <td class="psy-table-schedule-date"><span><?php echo $session->date.' <br> '.$session->time;?></span><button class="psy-table-btn"><a class="anchor-btn" href="<?php echo $session->link ?>">Join Now</a></button></td>
+      </tr>
+      <?php
+          }}
+          ?>
     </tbody>
   </table>
-</section>
-   
+  </section>
+  <br><br><span class="table-header">Patient List</span><br><br>
+  <section>
+    <table class="psy-table" cellspacing="0px">
+      <thead>
+        <tr>
+          <th><h1>Patient ID</h1></th>
+          <th><h1>Patient Name</h1></th>
+          <th><h1>Remarks</h1></th>
+          <th><h1>Reports</h1></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="psy-table-patient-id">1</td>
+          <td class="psy-table-patient-name">Alex Williams</td>
+          <td class="psy-table-remark">Needs a bit of vacation.</td>
+          <td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+    <br><br><button class="psy-table-btn"><a class="anchor-btn" href="../blog/writeblog.php">Write A Blog</a></button><br><br>
 </section> 
 </body>
 </html>

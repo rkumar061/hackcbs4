@@ -7,11 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="login.css"/>
     <link rel="stylesheet" type="text/css" href="fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="body.css"/>
 </head>
 <style>
-body{
-    margin: 0px;
-}
+
 .header{
     background: linear-gradient(90deg, rgb(224, 255, 255) 30%,60%, rgb(6, 19, 31) 80%);
     margin: 0px;

@@ -5,13 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="login.css"/>
-    <link rel="stylesheet" type="text/css" href="fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="../psy-session/login.css"/>
+    <link rel="stylesheet" type="text/css" href="../psy-session/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="../psy-session/body.css"/>
 </head>
 <style>
-body{
-    margin: 0px;
-}
+
 .header{
     background: linear-gradient(90deg, rgb(224, 255, 255) 30%,60%, rgb(6, 19, 31) 80%);
     margin: 0px;
