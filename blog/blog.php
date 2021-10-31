@@ -1,7 +1,11 @@
 <?php
     include 'header.php';
     include '../dbdetails.php';
-    
+    $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
+           
+      $b = $pdo->prepare('SELECT * FROM blog WHERE b_id = ?');
+      $b->execute([$_GET['bid']]);
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,12 +17,21 @@
 </head>
 <body>
     <div class="container">
+        <?php 
+        
+        if ($b->rowCount() > 0)
+        {
+            $blog=$b->fetch(PDO::FETCH_OBJ)
+            ?>
         <div class="title">
-            <h1>this is title</h1>
+            <h1><?php echo $blog->title; ?></h1>
         </div>
         <div class="desc">
-            <p>This isdescription of the blog</p>
+            <p><?php echo $blog->description; ?></p>
         </div>
+        <?php
+        }
+        ?>
     </div>
 </body>
 </html>
