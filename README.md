@@ -1,5 +1,5 @@
 ![alt text](imgs/logo.png)
-# **Team ADYPU | HackCBS 4.O 💼 ** Track : Healthcare
+# **Team ADYPU | HackCBS 4.O 💼 Track : Healthcare**
 
 
 # Problem Statement :
