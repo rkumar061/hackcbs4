@@ -150,12 +150,21 @@ if (isset($_SESSION['uid'])){
 </style>
 
 <body>
-    <?php include 'header.php' ?>
+    <?php 
+        include 'header.php';
+        include '../dbdetails.php';
+        $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
+        
+        $s = $pdo->prepare('SELECT * FROM session WHERE p_id = ? && done=0');
+        $s->execute([$_SESSION['uid']]);
+        // $nsession=$s->fetch(PDO::FETCH_OBJ);
+
+    ?>
 
     <section class="profile-wrapper">
         <div>
-            <span class="patient-name">John Doe</span><br><br>
-            <span class="patient-id">Your Patient ID: 12</span>
+            <span class="patient-name"><?Php echo 'Hello, '.$result->name;?></span><br><br>
+            <!-- <span class="patient-id">Your : 12</span> -->
         </div>
         <div class="profile-btn-wrapper">
             <button class="meetings-btn new-application"><a class="anchor-btn" href="#">New Application</a></button>
@@ -174,14 +183,28 @@ if (isset($_SESSION['uid'])){
                 <th><h1>Meeting Link</h1></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody><?php
+        if ($s->rowCount() > 0)
+      { 
+          while($nsession=$s->fetch(PDO::FETCH_OBJ))
+          {
+            $psy = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
+            $psy->execute([$nsession->psy_id]);
+            $psyname=$psy->fetch(PDO::FETCH_OBJ);
+
+            $p = $pdo->prepare('SELECT * FROM patient WHERE u_id = ?');
+            $p->execute([$_SESSION['uid']]);
+            $pdetail=$p->fetch(PDO::FETCH_OBJ);
+            ?>
             <tr>
-                <td class="table-psy-name">Eminem</td>
-                <td class="table-p-problem">Love Cancer</td>
-                <td class="table-psy-remarks">Mar jaa bsdk</td>
-                <td class="table-session-schedule">69/69/6969</td>
-                <td class="table-meeting-link"><button class="table-p-btn"><a href="#" class="anchor-btn">Join Now</a></button></td>
+                <td class="table-psy-name"><?Php echo $psyname->name;?></td>
+                <td class="table-p-problem"><?Php echo $pdetail->problem;?></td>
+                <td class="table-psy-remarks"><?Php echo $nsession->remark;?></td>
+                <td class="table-session-schedule"><?Php echo $nsession->date;?></td>
+                <td class="table-meeting-link"><button class="table-p-btn"><a href="<?Php echo $nsession->link;?>" class="anchor-btn">Join Now</a></button></td>
             </tr>
+            <?php
+        }}?>
         </tbody>
     </table>
 </section>
@@ -198,13 +221,31 @@ if (isset($_SESSION['uid'])){
             </tr>
         </thead> 
         <tbody>
+        <?php
+        $so = $pdo->prepare('SELECT * FROM session WHERE p_id = ? && done=1');
+        $so->execute([$_SESSION['uid']]);
+        if ($so->rowCount() > 0)
+      { 
+        //   echo 'old session';
+          while($osession=$so->fetch(PDO::FETCH_OBJ))
+          {
+            $psy = $pdo->prepare('SELECT * FROM user WHERE u_id = ?');
+            $psy->execute([$osession->psy_id]);
+            $psyname=$psy->fetch(PDO::FETCH_OBJ);
+
+            $p = $pdo->prepare('SELECT * FROM patient WHERE u_id = ?');
+            $p->execute([$_SESSION['uid']]);
+            $pdetail=$p->fetch(PDO::FETCH_OBJ);
+            ?>
             <tr>
-                <td class="table-psy-name">Eminem</td>
-                <td class="table-p-problem">Love Cancer</td>
-                <td class="table-psy-remarks">Mar jaa bsdk</td>
-                <td class="table-session-schedule">69/69/6969</td>
-                <td class="table-meeting-link"><button class="table-p-btn"><a href="report.php" class="anchor-btn">Report</a></button></td>
+                <td class="table-psy-name"><?Php echo $psyname->name;?></td>
+                <td class="table-p-problem"><?Php echo $pdetail->problem;?></td>
+                <td class="table-psy-remarks"><?Php echo $osession->remark;?></td>
+                <td class="table-session-schedule"><?Php echo $osession->date;?></td>
+                <td class="table-meeting-link"><button class="table-p-btn"><a href="<?Php echo 'report.php?sid='.$osession->s_id;?>" class="anchor-btn">view report</a></button></td>
             </tr>
+            <?php
+        }}?>
         </tbody> 
     </table>
 </section>
