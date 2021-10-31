@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
     .container{
         max-width: 80%;
         color:rgb(228, 220, 220);
-        background:rgb(205, 155, 252);
+        background:white;
         padding:34px;
         margin:auto;
     }
@@ -59,6 +58,11 @@
         
     }
     </style>
+    <?php
+        session_start();  
+        include 'header.php';
+        include '../dbdetails.php';
+    ?>  
     <section>
         <div class="container">
             <h1>APPLICATION FORM</h1>
