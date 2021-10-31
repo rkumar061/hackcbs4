@@ -85,6 +85,11 @@
       text-align:center;
     }
 
+    .psy-table-report button{
+      margin-left: 4px;
+      margin-right:4px;
+    }
+
     .psy-table-btn{
       background:rgb(224,255,255);
       color: rgba(0,0,0,1);
@@ -210,7 +215,7 @@
           <td class="psy-table-patient-id">1</td>
           <td class="psy-table-patient-name">Alex Williams</td>
           <td class="psy-table-remark">Needs a bit of vacation.</td>
-          <td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button></td>
+          <td class="psy-table-report"><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Report</a></button><button class="psy-table-btn"><a class="anchor-btn" href="report.php">Schedule Session</a></button></td>
         </tr>
       </tbody>
     </table>

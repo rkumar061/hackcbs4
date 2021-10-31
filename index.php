@@ -7,7 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include 'header.php' ?>
+<a href="psy-session/index.php">Login</a>
+<a href="psy-session/registration.php">Sign Up</a>
+<a href="blog/index.php">Blog</a>
+
     
 </body>
 </html>
