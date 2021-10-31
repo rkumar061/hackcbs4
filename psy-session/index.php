@@ -25,12 +25,7 @@ $_SESSION['uid']=$result->u_id;
     else if($role==2){
         header("Location: http://localhost/hackcbs4/psy-session/psy-dashboard.php");
     }
-    else if($role=='r'){
-        header("Location: http://localhost/IEEE/formresident.php?x=$uid&y=$pin");
-    }
-    else if($role=='t'){
-        header("Location: http://localhost/IEEE/formtiffin.php?x=$uid&y=$pin");
-    }
+    
    
 
 } 

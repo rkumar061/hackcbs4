@@ -184,6 +184,7 @@
         ?>
  	</tbody>
  </table>
+ <a href="../blog/writeblog.php"> <h1>write a blog</h1></a>
 </section>
 </body>
 </html>

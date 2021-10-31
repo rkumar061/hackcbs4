@@ -12,10 +12,7 @@
     
     // echo $name.$mobno.$pass1.$pass2.$email.$role ;
     
-    $host="mysql-55985-0.cloudclusters.net:17298";
-    $user="admin";
-    $password="9iYYKkqv";
-    $database="h4c";
+    include '../dbdetails.php';
 
     $pdo=new PDO("mysql:host=$host;dbname=$database",$user,$password);
   
