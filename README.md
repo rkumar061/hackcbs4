@@ -50,16 +50,23 @@
 
 
 ![alt text](imgs/team.png)
-1. Rajesh - 2nd Year (B-Tech in Cloud Technology and Information Technology)
+   
+
+
+1. Rajesh - 2nd Year (B-Tech in Cloud Technology and Information Technology) 
 
    College : Ajeenkya D.Y. Patil University, School Of Engeering.
 
    Domain : Web Developer( Front End & Backend )
+   
+   Past Hackathon Record : Participated in two hackathons                                
 2. Ushnish Bhowmik - 1st  Year (B-Tech in Information Technology and Data Science)
 
    College : Ajeenkya D.Y. Patil University, School Of Engeering.
 
    Domain : Web Developer( Front End )
+   
+   Past Hackathon Record : None
 
 3. Mihir JOshi - 1 st Year (BCA in Cloud Technology and Information Technology)
 
@@ -67,9 +74,13 @@
   
    Domain : Web Developer( Backend )
    
+   Past Hackathon Record : None
+   
  4. Bhargav Waghela - 1st Year (B-Tech Cloud Technology and Information Technology )
     
     College : Ajeenkya D.Y. Patil University, School Of Engeering.
   
     Domain : Web Developer( Front End)
+    
+    Past Hackathon Record : None
   
